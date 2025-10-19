@@ -25,7 +25,7 @@ def load_data():
     personal_data['WEEKDAY'] = personal_data['START_DATE'].dt.day_name()
     personal_data['DAY_OF_WEEK'] = personal_data['START_DATE'].dt.dayofweek
 
-    boston_data = pd.read_csv("data/uber_boston_cleaned.csv")
+    boston_data = pd.read_csv('data/uber_boston_cleaned_with_features.csv')
     drop_cols = ['apparentTemperature', 'precipIntensity', 'humidity', 'windSpeed', 'apparentTemperatureHigh', 'dewPoint', 
                  'precipIntensityMax', 'apparentTemperatureMax', 'cloudCover', 'moonPhase', 'windGustTime', 'visibility', 
                  'temperatureHighTime', 'apparentTemperatureHighTime', 'apparentTemperatureLow', 'apparentTemperatureLowTime', 
