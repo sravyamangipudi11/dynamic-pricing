@@ -31,7 +31,7 @@ def load_data():
                  'temperatureHighTime', 'apparentTemperatureHighTime', 'apparentTemperatureLow', 'apparentTemperatureLowTime', 
                  'temperatureMinTime', 'temperatureMaxTime', 'apparentTemperatureMin', 'apparentTemperatureMinTime', 
                  'apparentTemperatureMaxTime', 'windBearing', 'sunriseTime', 'uvIndex', 'visibility.1', 'ozone', 'sunsetTime', 'uvIndexTime']
-    boston_data = boston_data.drop(columns=drop_cols).dropna()
+    boston_data = boston_data.drop(columns=drop_cols, errors='ignore').dropna()
     boston_data = boston_data[boston_data['cab_type'] == 'Uber']
     boston_data['datetime'] = pd.to_datetime(boston_data['datetime'])
     boston_data['WEEKDAY'] = boston_data['datetime'].dt.day_name()
