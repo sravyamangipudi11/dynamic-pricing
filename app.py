@@ -37,6 +37,8 @@ def load_data():
     boston_data['WEEKDAY'] = boston_data['datetime'].dt.day_name()
     boston_data['IS_PEAK'] = boston_data['hour'].apply(lambda x: 1 if x in [7, 8, 9, 17, 18, 19] else 0)
     boston_data['IS_HOLIDAY'] = boston_data.apply(lambda x: 1 if x['month'] == 12 and x['day'] in [24, 25, 31] else 0, axis=1)
+    boston_data['source'] = boston_data['source'].astype(str)
+    boston_data['destination'] = boston_data['destination'].astype(str)
     boston_data['IS_AIRPORT'] = boston_data['source'].str.contains('Airport', case=False, na=False) | boston_data['destination'].str.contains('Airport', case=False, na=False)
 
     # Get unique values for dropdowns
