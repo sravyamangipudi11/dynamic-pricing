@@ -63,7 +63,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('https://images.unsplash.com/photo-1696524147929-56f1e4a05caf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFyayUyMGNhcnxlbnwwfHwwfHx8MA%3D%3D&fm=jpg&q=60&w=3000');
+        background-image: url('https://w0.peakpx.com/wallpaper/538/683/HD-wallpaper-late-morning-car-ride-neon-artist-artwork-digital-art-car.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
