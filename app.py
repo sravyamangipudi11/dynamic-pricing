@@ -63,7 +63,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url('https://w0.peakpx.com/wallpaper/538/683/HD-wallpaper-late-morning-car-ride-neon-artist-artwork-digital-art-car.jpg?v=2');
+        background-image: url('https://ubernewsroomapi.10upcdn.com/wp-content/uploads/sites/374/2015/11/uber_festival-dark-background_blog_700x300-1.png');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
