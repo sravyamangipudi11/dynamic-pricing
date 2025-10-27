@@ -25,7 +25,7 @@ def load_data():
     personal_data['WEEKDAY'] = personal_data['START_DATE'].dt.day_name()
     personal_data['DAY_OF_WEEK'] = personal_data['START_DATE'].dt.dayofweek
 
-    boston_data = pd.read_csv('data/rideshare_kaggle.csv')
+    boston_data = pd.read_csv("data/rideshare_kaggle.csv")
     drop_cols = ['apparentTemperature', 'precipIntensity', 'humidity', 'windSpeed', 'apparentTemperatureHigh', 'dewPoint', 
              'precipIntensityMax', 'apparentTemperatureMax', 'cloudCover', 'moonPhase', 'windGustTime', 'visibility', 
              'temperatureHighTime', 'apparentTemperatureHighTime', 'apparentTemperatureLow', 'apparentTemperatureLowTime', 
