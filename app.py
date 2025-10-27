@@ -59,24 +59,66 @@ model = load_model()
 personal_data, boston_data, unique_sources, unique_destinations, unique_names = load_data()
 
 # Apply background image with CSS
+# Apply background image with improved CSS
 st.markdown(
     """
     <style>
+    /* App background with darker overlay for readability */
     .stApp {
-        background-image: url('https://ubernewsroomapi.10upcdn.com/wp-content/uploads/sites/374/2015/11/uber_festival-dark-background_blog_700x300-1.png');
+        background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+                          url('https://ubernewsroomapi.10upcdn.com/wp-content/uploads/sites/374/2015/11/uber_festival-dark-background_blog_700x300-1.png');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        color: #ffffff !important;
+        font-weight: 700 !important;
     }
+
+    /* Make all text bold and bright */
+    h1, h2, h3, h4, h5, h6, p, span, div, label {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Sidebar styling for clarity */
+    section[data-testid="stSidebar"] {
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white !important;
+        font-weight: 700 !important;
+    }
+
+    /* Sidebar headings bold */
+    section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3, section[data-testid="stSidebar"] p {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+    }
+
+    /* Expander background with more opacity */
     .st-expander {
-        background-color: rgba(255, 255, 255, 0.85);
-        padding: 10px;
-        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.93);
+        border-radius: 10px;
+        padding: 12px;
+        color: #000000 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Buttons, sliders, and inputs text clarity */
+    .stButton>button, .stSlider label, .stSelectbox label, .stNumberInput label {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Make warning and success boxes readable */
+    .stAlert {
+        font-weight: 600 !important;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 # Sidebar navigation
 st.sidebar.title("Navigation")
