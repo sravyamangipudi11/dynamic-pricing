@@ -25,26 +25,33 @@ def load_data():
     personal_data['WEEKDAY'] = personal_data['START_DATE'].dt.day_name()
     personal_data['DAY_OF_WEEK'] = personal_data['START_DATE'].dt.dayofweek
 
-    boston_data = pd.read_csv('data/uber_boston_cleaned_with_features.csv')
+    boston_data = pd.read_csv('data/rideshare_kaggle.csv')
     drop_cols = ['apparentTemperature', 'precipIntensity', 'humidity', 'windSpeed', 'apparentTemperatureHigh', 'dewPoint', 
-                 'precipIntensityMax', 'apparentTemperatureMax', 'cloudCover', 'moonPhase', 'windGustTime', 'visibility', 
-                 'temperatureHighTime', 'apparentTemperatureHighTime', 'apparentTemperatureLow', 'apparentTemperatureLowTime', 
-                 'temperatureMinTime', 'temperatureMaxTime', 'apparentTemperatureMin', 'apparentTemperatureMinTime', 
-                 'apparentTemperatureMaxTime', 'windBearing', 'sunriseTime', 'uvIndex', 'visibility.1', 'ozone', 'sunsetTime', 'uvIndexTime']
-    boston_data = boston_data.drop(columns=drop_cols, errors='ignore').dropna()
+             'precipIntensityMax', 'apparentTemperatureMax', 'cloudCover', 'moonPhase', 'windGustTime', 'visibility', 
+             'temperatureHighTime', 'apparentTemperatureHighTime', 'apparentTemperatureLow', 'apparentTemperatureLowTime', 
+             'temperatureMinTime', 'temperatureMaxTime', 'apparentTemperatureMin', 'apparentTemperatureMinTime', 
+             'apparentTemperatureMaxTime', 'windBearing', 'sunriseTime', 'uvIndex', 'visibility.1', 'ozone', 'sunsetTime', 'uvIndexTime']
+    boston_data = boston_data.drop(columns=drop_cols).dropna()
     boston_data = boston_data[boston_data['cab_type'] == 'Uber']
     boston_data['datetime'] = pd.to_datetime(boston_data['datetime'])
     boston_data['WEEKDAY'] = boston_data['datetime'].dt.day_name()
     boston_data['IS_PEAK'] = boston_data['hour'].apply(lambda x: 1 if x in [7, 8, 9, 17, 18, 19] else 0)
     boston_data['IS_HOLIDAY'] = boston_data.apply(lambda x: 1 if x['month'] == 12 and x['day'] in [24, 25, 31] else 0, axis=1)
-    boston_data['source'] = boston_data['source'].astype(str)
-    boston_data['destination'] = boston_data['destination'].astype(str)
-    boston_data['IS_AIRPORT'] = boston_data['source'].str.contains('Airport', case=False, na=False) | boston_data['destination'].str.contains('Airport', case=False, na=False)
+ 
+    boston_data['source'] = boston_data['source'].where(boston_data['source'].notna(), None)
+    boston_data['destination'] = boston_data['destination'].where(boston_data['destination'].notna(), None)
+    boston_data['source'] = boston_data['source'].apply(lambda x: str(x) if pd.notna(x) else "")
+    boston_data['destination'] = boston_data['destination'].apply(lambda x: str(x) if pd.notna(x) else "")
 
-    # Get unique values for dropdowns
-    unique_sources = boston_data['source'].dropna().unique().tolist()
-    unique_destinations = boston_data['destination'].dropna().unique().tolist()
+    boston_data['IS_AIRPORT'] = (
+        boston_data['source'].str.contains('Airport', case=False, na=False) |
+        boston_data['destination'].str.contains('Airport', case=False, na=False)
+    )
+    
+    unique_sources = sorted([x for x in boston_data['source'].unique() if x and not x.isdigit()])
+    unique_destinations = sorted([x for x in boston_data['destination'].unique() if x and not x.isdigit()])
     unique_names = boston_data['name'].dropna().unique().tolist()
+
 
     return personal_data, boston_data, unique_sources, unique_destinations, unique_names
 
